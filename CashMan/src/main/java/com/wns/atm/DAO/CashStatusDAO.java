@@ -1,5 +1,7 @@
 package com.wns.atm.DAO;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import com.wns.atm.Model.Currency;
@@ -66,6 +68,16 @@ public class CashStatusDAO {
 			return cashStatus.getSum();
 
 	}
+	
+	public Map<Integer, Integer> findRow() {
+				return cashStatus.getRow();
+
+	}
+	
+	public Boolean findThreshold() {
+		return cashStatus.isThreshhold();
+
+}
 	
 	
 	public boolean updateThreshold(Boolean threshold) {
