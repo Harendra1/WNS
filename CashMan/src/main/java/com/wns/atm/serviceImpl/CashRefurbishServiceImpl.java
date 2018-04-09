@@ -13,8 +13,8 @@ import com.wns.atm.service.CashRefurbishService;
 
 @Service
 public class CashRefurbishServiceImpl implements CashRefurbishService {
-	
-	private static Logger logger=Logger.getLogger(CashRefurbishServiceImpl.class);
+
+	private static Logger logger = Logger.getLogger(CashRefurbishServiceImpl.class);
 
 	@Autowired
 	private CashStatusDAO cashStatusDAO;
@@ -23,8 +23,8 @@ public class CashRefurbishServiceImpl implements CashRefurbishService {
 
 	@Override
 	public Transaction depositCash(Integer denomination, Integer count) {
-		
-		logger.info("Depositing Cash....");
+		transaction = new Transaction();
+		logger.info("Depositing Cash...." + denomination + " -> " + count);
 
 		transaction.getNotes().add(new Currency(denomination, count));
 
@@ -34,28 +34,26 @@ public class CashRefurbishServiceImpl implements CashRefurbishService {
 		return transaction;
 
 	}
-	
-	public Transaction initialize(Integer denomination, Integer count)
-	{
-		logger.info("Initializing Cash machine with value....");
+
+	public Transaction initialize(Integer denomination, Integer count) {
+		transaction = new Transaction();
+		logger.info("Initializing Cash machine with value...." + denomination + " -> " + count);
 		cashStatusDAO.deleteAll();
 		transaction.getNotes().add(new Currency(denomination, count));
 
 		transaction.setSuccess(cashStatusDAO.insertCashStaus(transaction));
 		logger.info("ATM Machine initialized....");
 		return transaction;
-		
+
 	}
 
-	
-	public Transaction initialize()
-	{
+	public Transaction initialize() {
 		cashStatusDAO.deleteAll();
 		transaction.getNotes().add(new Currency(20, 20));
 		transaction.getNotes().add(new Currency(50, 20));
 		transaction.setSuccess(cashStatusDAO.insertCashStaus(transaction));
 
 		return transaction;
-		
+
 	}
 }
