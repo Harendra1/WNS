@@ -59,7 +59,7 @@ tab1 {
 		<hr>
 
 		<b>Total Cash in ATM --> ${cashStatus.sum}</b><br>
-     	</b><c:if test="${cashStatus.threshhold == 'false'}">Cash in ATM below threshold..Action immediately!!!</c:if><br>
+     	</b><c:if test="${cashStatus.threshhold == 'true'}">Cash in ATM below threshold..Action immediately!!!</c:if><br>
 		<hr>
 
 
