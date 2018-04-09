@@ -9,14 +9,15 @@ import com.wns.atm.entity.CashStatus;
 
 @Component
 public class Populate_ATM {
-	
-	CashStatus cashStatus=CashStatus.getInstance();
+	@Autowired
+	CashStatusDAO  cashStatusDAO;
+
 	
 	public AtmStatus populate(AtmStatus atm)
 	{
-		atm.setRow(cashStatus.getRow());
-		atm.setSum(cashStatus.getSum());
-		atm.setThreshhold(cashStatus.isThreshhold());
+		atm.setRow(cashStatusDAO.findRow());
+		atm.setSum(cashStatusDAO.findTotalBalance());
+		atm.setThreshhold(cashStatusDAO.findThreshold());
 		return atm;
 	}
 
