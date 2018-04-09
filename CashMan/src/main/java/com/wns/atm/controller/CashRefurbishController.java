@@ -12,14 +12,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.wns.atm.Facade.CashRefurbishFacade;
+import com.wns.atm.Model.AtmStatus;
 import com.wns.atm.Model.Deposit;
 import com.wns.atm.entity.CashStatus;
+import com.wns.atm.populator.Populate_ATM;
 
 @Controller
 public class CashRefurbishController {
 
 @Autowired
 CashRefurbishFacade cashRefurbishFacade;
+
+@Autowired
+Populate_ATM populator;
 
 
 	@RequestMapping(value="/updatestack", method=RequestMethod.GET)
@@ -32,7 +37,7 @@ CashRefurbishFacade cashRefurbishFacade;
 	
 	@RequestMapping(value = "/present", method = RequestMethod.GET)
 	public ModelAndView getCurrent() {
-		return new ModelAndView("current","cashStatus", CashStatus.getInstance());
+		return new ModelAndView("current","cashStatus", populator.populate(new AtmStatus()));
 	}
 	
 	
