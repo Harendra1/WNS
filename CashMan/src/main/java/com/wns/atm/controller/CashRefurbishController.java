@@ -30,8 +30,7 @@ Populate_ATM populator;
 	@RequestMapping(value="/updatestack", method=RequestMethod.GET)
 	public ModelAndView current(Model model)
 	{
-
-     return new ModelAndView("refurbish","deposit",new Deposit());
+	     return new ModelAndView("refurbish","deposit",new Deposit());
 
 	}
 	
@@ -53,8 +52,9 @@ Populate_ATM populator;
 		{
 		
 		cashRefurbishFacade.depositCash(deposit);
-		CashStatus cashStatus=CashStatus.getInstance();
-		model.addAttribute("cashStatus", cashStatus);
+		AtmStatus atmStatus=new AtmStatus();
+		populator.populate(atmStatus);
+		model.addAttribute("cashStatus", atmStatus);
 		return "current";
 		}
 	}
@@ -69,8 +69,9 @@ Populate_ATM populator;
 		else
 		{
 		cashRefurbishFacade.initialize(deposit);
-		CashStatus cashStatus=CashStatus.getInstance();
-		model.addAttribute("cashStatus", cashStatus);
+		AtmStatus atmStatus=new AtmStatus();
+		populator.populate(atmStatus);
+		model.addAttribute("cashStatus", atmStatus);
 		return "current";
 		}
 
